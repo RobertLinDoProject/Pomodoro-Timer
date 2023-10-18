@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(35, 49, 91);
+  height: 100vh;
+}
+body .border {
+  background-color: rgba(255, 255, 255, 0.706);
+  height: 80vh;
+  border-radius: 2rem;
+}
+body .border header {
+  background-color: rgb(38, 200, 23);
+  height: 15%;
+  max-width: 100%;
+  border-radius: 2rem 2rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+body .border header .t1,
+body .border header .t2,
+body .border header .t3,
+body .border header .t4 {
+  background-color: rgb(255, 255, 255);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+body .border .mid_one {
+  background-color: rgb(226, 45, 45);
+  height: 15%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+body .border .mid_one h2 {
+  color: white;
+  font-size: 3rem;
+}
+body .border .mid_two {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  height: 40%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+body .border .mid_two h1 {
+  font-size: 5rem;
+}
+body .border .mid_three {
+  background-color: bisque;
+  height: 15%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+body .border .mid_three img {
+  height: 100px;
+  width: 100px;
+}
+body .border .mid_three select {
+  height: 60px;
+  width: 100px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 20%;
+}
+body .border .mid_three select:hover {
+  cursor: pointer;
+  background-color: red;
+  color: black;
+}
+body .border .mid_three img:hover {
+  cursor: pointer;
+  background-color: red;
+  border-radius: 50%;
+}
+body .border footer {
+  background-color: bisque;
+  height: 15%;
+  max-width: 100%;
+  border-radius: 0 0 2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+body .border footer button:hover {
+  background-color: white;
+  color: red;
+  cursor: pointer;
+}
+body .border footer .left {
+  background-color: red;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+body .border footer .mid {
+  background-color: red;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+body .border footer .right {
+  background-color: red;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 500px) {
+  .border {
+    width: 80vw;
+    max-width: 100%;
+  }
+  footer button {
+    height: 3rem;
+    width: 5rem;
+  }
+}
+@media (min-width: 501px) {
+  .border {
+    width: 25vw;
+    max-width: 100%;
+  }
+  footer button {
+    height: 4rem;
+    width: 7rem;
+  }
+}/*# sourceMappingURL=style.css.map */
