@@ -1,32 +1,106 @@
-let hour_ten_digits = document.querySelector(".hour_ten_digits");
-let hour_digit = document.querySelector(".hour_digit");
-let minute_ten_digits = document.querySelector(".minute_ten_digits");
-let minute_digit = document.querySelector(".minute_digit");
-let pause = document.querySelector("footer .left");
-let start = document.querySelector("footer .mid");
-let reset = document.querySelector("footer .right");
+let totalSeconds = 1 * 5;
+let timerInterval;
+let roundCounter = 0;
+let iterCounter = 0;
+let isReset = true;
 
-function hour_ten_digits_func(start, end, interval) {
-  if (start >= end) {
-    hour_ten_digits.innerText = start;
-    start -= 1;
-    setTimeout(() => {
-      hour_ten_digits_func(start, end, interval);
-    }, interval);
+const minuteTen = document.querySelector(".minute_ten_digits");
+const minuteOne = document.querySelector(".minute_digit");
+const SecondTen = document.querySelector(".second_ten_digits");
+const SecondOne = document.querySelector(".second_digit");
+const startButton = document.querySelector(".mid");
+const pauseButton = document.querySelector(".left");
+const resetButton = document.querySelector(".right");
+const t1 = document.querySelector(".t1");
+const t2 = document.querySelector(".t2");
+const t3 = document.querySelector(".t3");
+const t4 = document.querySelector(".t4");
+const iter = document.querySelector(".mid_one h2");
+
+startButton.addEventListener("click", startTimer);
+pauseButton.addEventListener("click", pauseTimer);
+resetButton.addEventListener("click", resetTimer);
+
+function startTimer() {
+  startButton.disabled = true;
+  pauseButton.disabled = false;
+  resetButton.disabled = false;
+  if (isReset === true) {
+    timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+  } else {
+    alert("Plz reset timer !!");
   }
 }
 
-// function hour_digit_func(start, end, interval) {
-//   if (start <= end) {
-//     hour_digit.innerText = start;
-//     start += 1;
-//     setTimeout(() => {
-//         hour_digit_func(start, end, interval);
-//     }, interval);
-//   }
-// }
+function pauseTimer() {
+  startButton.disabled = false;
+  pauseButton.disabled = true;
+  resetButton.disabled = false;
+  clearInterval(timerInterval);
+}
 
-function start_func() {}
+function resetTimer() {
+  startButton.disabled = false;
+  pauseButton.disabled = true;
+  resetButton.disabled = true;
+  if (roundCounter === 0) {
+    t1.style = "background-color: white";
 
-hour_ten_digits_func(6, 0, 1000);
-// hour_digit_func(0, 9, 1000);
+    t2.style = "background-color: white";
+
+    t3.style = "background-color: white";
+
+    t4.style = "background-color: white";
+  }
+  clearInterval(timerInterval);
+  totalSeconds = 1 * 5;
+  isReset = true;
+  updateTimer();
+}
+
+function updateTimer() {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const minutesTens = Math.floor(minutes / 10);
+  const minutesOnes = minutes % 10;
+  const secondsTens = Math.floor(seconds / 10);
+  const secondsOnes = seconds % 10;
+
+  minuteTen.innerText = minutesTens;
+  minuteOne.innerText = minutesOnes;
+  SecondTen.innerText = secondsTens;
+  SecondOne.innerText = secondsOnes;
+
+  if (totalSeconds === 0) {
+    clearInterval(timerInterval);
+    alert("Times up, reset timer.");
+    if (totalSeconds === 0) {
+      roundCounter++;
+      if (roundCounter === 1) {
+        t1.style = "background-color: red";
+      } else if (roundCounter === 2) {
+        t2.style = "background-color: red";
+      } else if (roundCounter === 3) {
+        t3.style = "background-color: red";
+      } else if (roundCounter === 4) {
+        t4.style = "background-color: red";
+        resetRound(roundCounter);
+      }
+      startButton.disabled = false;
+      pauseButton.disabled = true;
+      resetButton.disabled = false;
+      isReset = false;
+    }
+  } else {
+    totalSeconds--;
+  }
+}
+
+function resetRound(round) {
+  if (round === 4) {
+    roundCounter = 0;
+    iterCounter++;
+    iter.innerText = iterCounter;
+  }
+}
