@@ -1,8 +1,9 @@
-let totalSeconds = 1 * 5;
+let totalSeconds = 25 * 60;
 let timerInterval;
 let roundCounter = 0;
 let iterCounter = 0;
 let isReset = true;
+let isRest = false;
 
 const minuteTen = document.querySelector(".minute_ten_digits");
 const minuteOne = document.querySelector(".minute_digit");
@@ -25,11 +26,17 @@ function startTimer() {
   startButton.disabled = true;
   pauseButton.disabled = false;
   resetButton.disabled = false;
-  if (isReset === true) {
-    timerInterval = setInterval(updateTimer, 1000);
-    updateTimer();
+  if (isRest !== true) {
+    if (isReset === true) {
+      timerInterval = setInterval(updateTimer, 1000);
+      updateTimer();
+    } else {
+      alert("Plz Reset Timer");
+    }
   } else {
-    alert("Plz reset timer !!");
+    totalSeconds = 5 * 60;
+    timerInterval = setInterval(rest, 1000);
+    rest();
   }
 }
 
@@ -54,7 +61,7 @@ function resetTimer() {
     t4.style = "background-color: white";
   }
   clearInterval(timerInterval);
-  totalSeconds = 1 * 5;
+  totalSeconds = 25 * 60;
   isReset = true;
   updateTimer();
 }
@@ -74,8 +81,8 @@ function updateTimer() {
 
   if (totalSeconds === 0) {
     clearInterval(timerInterval);
-    alert("Times up, reset timer.");
-    if (totalSeconds === 0) {
+    alert("Times up, Reset timer, or Start To Break");
+    if (isRest === false) {
       roundCounter++;
       if (roundCounter === 1) {
         t1.style = "background-color: red";
@@ -87,11 +94,13 @@ function updateTimer() {
         t4.style = "background-color: red";
         resetRound(roundCounter);
       }
-      startButton.disabled = false;
-      pauseButton.disabled = true;
-      resetButton.disabled = false;
-      isReset = false;
+      isRest = true;
     }
+
+    startButton.disabled = false;
+    pauseButton.disabled = true;
+    resetButton.disabled = false;
+    isReset = false;
   } else {
     totalSeconds--;
   }
@@ -102,5 +111,27 @@ function resetRound(round) {
     roundCounter = 0;
     iterCounter++;
     iter.innerText = iterCounter;
+  }
+}
+
+function rest() {
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const minutesTens = Math.floor(minutes / 10);
+  const minutesOnes = minutes % 10;
+  const secondsTens = Math.floor(seconds / 10);
+  const secondsOnes = seconds % 10;
+
+  minuteTen.innerText = minutesTens;
+  minuteOne.innerText = minutesOnes;
+  SecondTen.innerText = secondsTens;
+  SecondOne.innerText = secondsOnes;
+
+  if (totalSeconds === 0) {
+    isRest = false;
+    clearInterval(timerInterval);
+    alert("Rest Times up! Plz Reset To Start Working!");
+  } else {
+    totalSeconds--;
   }
 }
